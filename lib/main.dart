@@ -1,4 +1,4 @@
-import 'file:///C:/Users/tolik/AndroidStudioProjects/core_box/lib/screens/splash/splash_screen.dart';
+import 'package:core_box/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
