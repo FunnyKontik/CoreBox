@@ -1,5 +1,6 @@
 import 'package:core_box/custom_widgets/custom_login_button.dart';
 import 'package:core_box/custom_widgets/custom_text_input.dart';
+import 'package:core_box/screens/adding_welcome/adding_welcome_screen.dart';
 import 'package:core_box/screens/registration/registration_screen.dart';
 import 'package:core_box/utils/navigation_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -75,7 +76,10 @@ class _AuthScreenState extends State<AuthScreen> {
                 child: CustomLogin(
                   title: 'Sign In',
                   backgroundColor: Color.fromRGBO(135, 135, 135, 1),
-                  onPressed: () {},
+                  onPressed: () {
+                    NavigationUtils.toScreenRemoveUntil(context,
+                        screen: AddWelcome());
+                  },
                 ),
               ),
               Text(
