@@ -1,8 +1,9 @@
 import 'package:core_box/screens/adding_welcome/adding_welcome_screen.dart';
-import 'file:///C:/Intellij_projects/core_box/lib/screens/home/tabs/profile/profile_tab.dart';
-import 'file:///C:/Intellij_projects/core_box/lib/screens/home/tabs/systemsOverview/systemsOverview_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'tabs/profile/profile_tab.dart';
+import 'tabs/systemsOverview/systemsOverview_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
