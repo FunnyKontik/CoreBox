@@ -1,4 +1,7 @@
 import 'package:core_box/custom_widgets/custom_login_button.dart';
+import 'package:core_box/screens/code_entering/code_entering_screen.dart';
+import 'package:core_box/screens/home/home_screen.dart';
+import 'package:core_box/utils/navigation_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,7 +55,7 @@ Widget buildBody(BuildContext context) {
         Positioned(
           top: 0,
           left: 0,
-         // height: 800,
+          // height: 800,
           width: MediaQuery.of(context).size.width,
           child: SizedBox(
             height: 800,
@@ -100,7 +103,10 @@ Widget buildBody(BuildContext context) {
                     child: CustomLogin(
                       title: 'Add new system',
                       backgroundColor: Color.fromRGBO(18, 111, 242, 1),
-                      onPressed: () {},
+                      onPressed: () {
+                        NavigationUtils.toScreen(context,
+                            screen: CodeEntering());
+                      },
                     ),
                   ),
                 ],

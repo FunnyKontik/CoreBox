@@ -17,13 +17,16 @@ class CustomLogin extends StatelessWidget {
     return SizedBox(
       width: 364,
       height: 45,
-
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(title, textAlign: TextAlign.center, style: GoogleFonts.montserrat(fontSize: 18,),),
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.montserrat(fontSize: 18, color: Colors.white),
+        ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
+            (Set<MaterialState> states) {
               return backgroundColor;
             },
           ),
