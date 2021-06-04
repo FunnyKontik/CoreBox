@@ -30,6 +30,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.1.0
   pin_code_fields: ^7.2.0
+  firebase_auth: ^1.1.2
+  firebase_core: ^1.1.0
+  cloud_firestore: ^1.0.7
+  google_sign_in: ^5.0.2
+  bloc: ^7.0.0
+  flutter_bloc: ^7.0.0
+  flutter_facebook_login: ^3.0.0
+  pay: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -44,6 +52,9 @@ flutter:
     - assets/logo.png
     - assets/group.png
     - assets/cube.png
+    - assets/profileBack.png
+    - assets/pay.png
+    - assets/gpay.json
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

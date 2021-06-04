@@ -1,8 +1,13 @@
 import 'dart:async';
+import 'package:core_box/cubit/auth/auth_cubit.dart';
+import 'package:core_box/cubit/auth/auth_state.dart';
+import 'package:core_box/screens/auth/auth_screen.dart';
+import 'package:core_box/screens/home/home_screen.dart';
 import 'package:core_box/screens/registration/registration_screen.dart';
 import 'package:core_box/utils/navigation_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,25 +16,36 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  AuthCubit authCubit = AuthCubit();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: buildBody(),
-    );
+    return BlocListener<AuthCubit, AuthState>(
+        bloc: authCubit,
+        listener: (_, state) {
+          if (!state.isLoading) {
+            NavigationUtils.toScreenRemoveUntil(context,
+                screen: state.currentUser != null
+                    ? HomeScreen(
+                        currentUser: state.currentUser,
+                      )
+                    : AuthScreen());
+          }
+        },
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          body: buildBody(context),
+        ));
   }
 
   @override
   void initState() {
+    authCubit.checkCurrentUser();
     super.initState();
-    Future.delayed(Duration(milliseconds: 3500), () {
-      NavigationUtils.toScreenRemoveUntil(context,
-          screen: RegistrationScreen());
-    });
   }
 }
 
-Widget buildBody() {
+Widget buildBody(BuildContext context) {
   return Center(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

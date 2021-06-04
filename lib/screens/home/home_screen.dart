@@ -1,25 +1,36 @@
+import 'package:core_box/models/user_model.dart';
 import 'package:core_box/screens/adding_welcome/adding_welcome_screen.dart';
-import 'file:///C:/Intellij_projects/core_box/lib/screens/home/tabs/profile/profile_tab.dart';
-import 'file:///C:/Intellij_projects/core_box/lib/screens/home/tabs/systemsOverview/systemsOverview_tab.dart';
+import 'package:core_box/screens/home/tabs/profile/profile_tab.dart';
+import 'package:core_box/screens/home/tabs/systemsOverview/systemsOverview_tab.dart';
+import 'package:core_box/screens/home/tabs/payment/payment_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+  final UserModel currentUser;
+
+  const HomeScreen({Key key, @required this.currentUser}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final tabs = <Widget>[
-    AddWelcome(),
-    SysOverviewTab(),
-    ProfileTab(),
-  ];
-
   int currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
+    final tabs = <Widget>[
+      PaymentScreen(
+        currentUser: widget.currentUser,
+      ),
+      SysOverviewTab(),
+      ProfileTab(
+        currentUser: widget.currentUser,
+      ),
+
+    ];
+
     return DefaultTabController(
       length: 3,
       initialIndex: 1,

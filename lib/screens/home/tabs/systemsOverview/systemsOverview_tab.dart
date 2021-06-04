@@ -17,7 +17,7 @@ class _SysOverviewTabState extends State<SysOverviewTab> {
       color: Colors.black,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 25),
-        child: ListView(
+        child: Column(
           children: <Widget>[
             Center(
               child: Row(
@@ -47,6 +47,7 @@ class _SysOverviewTabState extends State<SysOverviewTab> {
                 systemName: 'Home',
                 amountOfModules: 5,
                 isSystemOn: true,
+                isSystemItem: true,
                 onTap: () {
                   NavigationUtils.toScreen(context, screen: SystemConfig(systemName: 'Home', isSystemOn: true,));
                 },
@@ -56,6 +57,7 @@ class _SysOverviewTabState extends State<SysOverviewTab> {
               systemName: 'Office',
               amountOfModules: 3,
               isSystemOn: false,
+              isSystemItem: true,
               onTap: () {},
             ),
           ],

@@ -1,12 +1,18 @@
 import 'package:core_box/custom_widgets/custom_login_button.dart';
+import 'package:core_box/models/user_model.dart';
 import 'package:core_box/screens/code_entering/code_entering_screen.dart';
 import 'package:core_box/screens/home/home_screen.dart';
 import 'package:core_box/utils/navigation_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddWelcome extends StatefulWidget {
+  final UserModel currentUser;
+
+  const AddWelcome({@required this.currentUser});
+
   @override
   _AddWelcomeState createState() => _AddWelcomeState();
 }
@@ -16,12 +22,12 @@ class _AddWelcomeState extends State<AddWelcome> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: buildBody(context),
+      body: buildBody(context, widget.currentUser),
     );
   }
 }
 
-Widget buildBody(BuildContext context) {
+Widget buildBody(BuildContext context, UserModel currentUser) {
   return Container(
     height: MediaQuery.of(context).size.height,
     child: Stack(
@@ -41,7 +47,7 @@ Widget buildBody(BuildContext context) {
           ),
         ),
         Positioned(
-          top: 629,
+          top: 600,
           left: 242,
           child: Container(
             width: 253,
@@ -53,99 +59,77 @@ Widget buildBody(BuildContext context) {
           ),
         ),
         Positioned(
+          height: MediaQuery.of(context).size.height,
           top: 0,
           left: 0,
-          // height: 800,
           width: MediaQuery.of(context).size.width,
           child: SizedBox(
             height: 800,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 25),
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 65, bottom: 160),
-                    child: Text(
-                      'Your first system!',
-                      style: GoogleFonts.sourceSansPro(
-                          color: Colors.white, fontSize: 20),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: 30,
+                          height: 30,
+                        ),
+                        Text(
+                          'Your first system!',
+                          style: GoogleFonts.sourceSansPro(
+                              color: Colors.white, fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                        if (currentUser.imageUrl.isNotEmpty)
+                          Container(
+                            width: 35,
+                            height: 35,
+                            child: ClipRRect(
+                              child: Image.network(
+                                currentUser.imageUrl,
+                              ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(90)),
+                            ),
+                          ),
+                      ]),
                   Image.asset('assets/group.png'),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 80.0,
-                    ),
-                    child: Text(
-                      'Welcome! Add your first system and start remotely',
-                      style: GoogleFonts.sourceSansPro(
-                          fontSize: 16,
-                          color: Color.fromRGBO(169, 169, 169, 1)),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 155.0),
-                    child: Text(
-                      'controlling your home.',
-                      style: GoogleFonts.sourceSansPro(
-                        fontSize: 16,
-                        color: Color.fromRGBO(169, 169, 169, 1),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                        'Welcome! Add your first system and start remotely',
+                        style: GoogleFonts.sourceSansPro(
+                            fontSize: 16,
+                            color: Color.fromRGBO(169, 169, 169, 1)),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
+                      Text(
+                        'controlling your home.',
+                        style: GoogleFonts.sourceSansPro(
+                          fontSize: 16,
+                          color: Color.fromRGBO(169, 169, 169, 1),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 120.0),
-                    child: CustomLogin(
-                      title: 'Add new system',
-                      backgroundColor: Color.fromRGBO(18, 111, 242, 1),
-                      onPressed: () {
-                        NavigationUtils.toScreen(context,
-                            screen: CodeEntering());
-                      },
-                    ),
+
+                  CustomLogin(
+                    title: 'Add new system',
+                    backgroundColor: Color.fromRGBO(18, 111, 242, 1),
+                    onPressed: () {
+                      NavigationUtils.toScreen(context,
+                          screen: CodeEntering(currentUser: currentUser,));
+                    },
                   ),
                 ],
               ),
             ),
           ),
         ),
-        // Positioned(
-        //   top: 249,
-        //   left: 26,
-        //   child: Image.asset('assets/group.png'),
-        // ),
-        // Positioned(
-        //     top: 613,
-        //     left: 26,
-        //     child: Column(
-        //       children: <Widget>[
-        //         Text(
-        //           'Welcome! Add your first system and start remotely',
-        //           style: GoogleFonts.sourceSansPro(
-        //               fontSize: 16,
-        //               color: Color.fromRGBO(169, 169, 169, 1)),
-        //         ),
-        //         Text(
-        //           'controlling your home.',
-        //           style: GoogleFonts.sourceSansPro(
-        //               fontSize: 16,
-        //               color: Color.fromRGBO(169, 169, 169, 1)),
-        //         ),
-        //       ],
-        //     )),
-        // Positioned(
-        //     top: 750,
-        //     left: 25,
-        //     child: CustomLogin(
-        //       title: 'Add new system',
-        //       backgroundColor: Color.fromRGBO(18, 111, 242, 1),
-        //       onPressed: () {},
-        //     ))
       ],
     ),
   );

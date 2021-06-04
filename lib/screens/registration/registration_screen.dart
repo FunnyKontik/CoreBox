@@ -32,90 +32,97 @@ Widget buildBody(BuildContext context) {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  return ListView(
+  return Padding(
     padding: EdgeInsets.symmetric(vertical: 45, horizontal: 25),
-    children: <Widget>[
-      SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 0.0),
-              child: Text(
-                'Sign up',
-                style: GoogleFonts.montserrat(
-                    fontSize: 28,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white),
+    child: Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 0.0),
+                child: Text(
+                  'Sign up',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 28,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.white),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0, top: 60),
-              child: CustomTextInput(
-                title: 'Name',
-                textEditingController: nameController,
-                isPassword: false,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0, top: 60),
+                child: CustomTextInput(
+                  title: 'Name',
+                  textEditingController: nameController,
+                  isPassword: false,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: CustomTextInput(
-                  title: 'Email',
-                  textEditingController: emailController,
-                  isPassword: false),
-            ),
-            CustomTextInput(
-                title: 'Password',
-                textEditingController: passwordController,
-                isPassword: true),
-            Padding(
-              padding: const EdgeInsets.only(top: 124.0, bottom: 60),
-              child: CustomLogin(
+              Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: CustomTextInput(
+                    title: 'Email',
+                    textEditingController: emailController,
+                    isPassword: false),
+              ),
+              CustomTextInput(
+                  title: 'Password',
+                  textEditingController: passwordController,
+                  isPassword: true),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              CustomLogin(
                 title: 'Sign Up',
                 backgroundColor: Color.fromRGBO(135, 135, 135, 1),
                 onPressed: () {},
               ),
-            ),
-            Text(
-              'or',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Color.fromRGBO(135, 135, 135, 1)),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: CustomLogin(
-                  title: 'Sign up with Google',
-                  backgroundColor: Color.fromRGBO(221, 72, 69, 1),
-                  onPressed: () {}),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 60),
-              child: CustomLogin(
-                  title: 'Sign up with Facebook',
-                  backgroundColor: Color.fromRGBO(58, 89, 152, 1),
-                  onPressed: () {}),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Already have an account?',
-                  style: GoogleFonts.montserrat(
-                      fontSize: 18, color: Color.fromRGBO(135, 135, 135, 1)),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Text(
+                  'or',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Color.fromRGBO(135, 135, 135, 1)),
                 ),
-                TextButton(
-                  onPressed: () {
-                    NavigationUtils.toScreenRemoveUntil(context, screen: AuthScreen());
-                  },
-                  child: Text('Sign in',
-                      style: GoogleFonts.montserrat(
-                          color: Colors.white, fontSize: 18)),
-                ),
-              ],
-            )
-          ],
-        ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 30.0),
+                child: CustomLogin(
+                    title: 'Sign up with Google',
+                    backgroundColor: Color.fromRGBO(221, 72, 69, 1),
+                    onPressed: () {}),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 60),
+                child: CustomLogin(
+                    title: 'Sign up with Facebook',
+                    backgroundColor: Color.fromRGBO(58, 89, 152, 1),
+                    onPressed: () {}),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Already have an account?',
+                    style: GoogleFonts.montserrat(
+                        fontSize: 18, color: Color.fromRGBO(135, 135, 135, 1)),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      NavigationUtils.toScreenRemoveUntil(context,
+                          screen: AuthScreen());
+                    },
+                    child: Text('Sign in',
+                        style: GoogleFonts.montserrat(
+                            color: Colors.white, fontSize: 18)),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ],
       ),
-    ],
+    ),
   );
 }

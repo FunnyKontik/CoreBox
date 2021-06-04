@@ -1,4 +1,5 @@
 import 'package:core_box/custom_widgets/custom_login_button.dart';
+import 'package:core_box/models/user_model.dart';
 import 'package:core_box/screens/home/home_screen.dart';
 import 'package:core_box/utils/navigation_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class CodeEntering extends StatefulWidget {
+  final UserModel currentUser;
+
+  CodeEntering({@required this.currentUser}) ;
+
   @override
   _CodeEnteringState createState() => _CodeEnteringState();
 }
@@ -91,7 +96,7 @@ class _CodeEnteringState extends State<CodeEntering> {
                     onPressed: () {
                       Navigator.pop(context);
                       NavigationUtils.toScreenRemoveUntil(context,
-                          screen: HomeScreen());
+                          screen: HomeScreen(currentUser: widget.currentUser,));
                     },
                   ),
                 ),
